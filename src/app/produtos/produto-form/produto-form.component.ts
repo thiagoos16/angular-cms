@@ -20,14 +20,20 @@ export class ProdutoFormComponent implements OnInit {
     this.produto = new Produto();
 
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    
+    if (id) {
+      this.produtoService.getById(parseInt(id)).subscribe(resp => {
+        this.produto = resp;
+        this.title = `Update produto: ${this.produto.nome}`;
+      });
+    }
   }
 
   onSubmit() {
     let observable: Observable<Produto>;
 
     if (this.produto.id) {
-
+      observable = this.produtoService.update(this.produto);
     } else {
       observable = this.produtoService.insert(this.produto);
     }
