@@ -16,7 +16,8 @@ export class ProdutoService {
   }
 
   getById(id: number) {
-
+    const url = `${this.URL}/${id}`;
+    return this.http.get<Produto>(url);
   }
 
   insert(produto: Produto) {
@@ -24,10 +25,11 @@ export class ProdutoService {
   }
 
   update(produto: Produto) {
-
+    return this.http.put<Produto>(this.URL, produto)
   }
 
   remove(id: number) {
-
+    const url = `${this.URL}/${id}`;
+    return this.http.delete<Produto>(url);
   }
 }
