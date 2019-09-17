@@ -5,7 +5,7 @@
 
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #form="ngForm">
-      
+
       <div class="form-group">
         <label> Nome </label>
         <input type="text" class="form-control" [(ngModel)]="produto.nome" name="nome"  #nome="ngModel" required minlength="3" />
@@ -23,7 +23,7 @@
       <div class="form-group">
         <label> Descrição </label>
         <textarea class="form-control" [(ngModel)]="produto.descricao" name="descricao"  #descricao="ngModel" rows="3" required minlength="30"> </textarea>
-      
+
         <div *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)" class="alert alert-danger">
           <div *ngIf="descricao.errors.required">
             Descrição é obrigatório.
@@ -46,7 +46,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid"> Salvar </button>
-      <a class="btn btn-secondary ml-2"> Cancelar </a>
+      <a routerLink="/produtos" class="btn btn-secondary ml-2"> Cancelar </a>
 
     </form>
   </div>
