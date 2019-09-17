@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { ProdutoListComponent } from './produtos/produto-list/produto-list.component';
 import { ProdutoFormComponent } from './produtos/produto-form/produto-form.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 const appRoutes: Routes = [
   { path: 'produtos', component: ProdutoListComponent },
   { path: 'produtos/novo', component: ProdutoFormComponent },
@@ -31,7 +35,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryData),
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
