@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Produto } from '../shared/produto';
+import { ProdutoService } from '../shared/produto.service';
 
 @Component({
   selector: 'app-produto-list',
@@ -11,12 +12,17 @@ export class ProdutoListComponent implements OnInit {
   title: string = 'Produtos';
   produtos: Produto[];
 
-  constructor() { }
+  constructor(private produtoService: ProdutoService) { }
 
   ngOnInit() {
-    this.produtos = [
-      { id: 1, nome: 'McFarlane Toys Voldemort', descricao: 'Action Figure Lord Voldemort', preco: 8.5 }
-    ];
+    this.getAll();
   }
 
+  getAll() {
+    this.produtoService.getAll().subscribe(resp => {
+      this.produtos = resp;
+    })
+  }
+
+   
 }
