@@ -24,5 +24,9 @@ export class ProdutoListComponent implements OnInit {
     })
   }
 
-   
+  remove(produto: Produto) {
+    this.produtoService.remove(produto.id).subscribe(() => {
+      this.produtos = this.produtos.filter(p => p !== produto);
+    });
+  }
 }
