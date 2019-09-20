@@ -13,22 +13,30 @@ import { ProdutoFormComponent } from './produtos/produto-form/produto-form.compo
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { EditComponent } from './users/edit/edit.component';
+import { ListComponent } from './users/list/list.component';
 
 const appRoutes: Routes = [
   { path: 'produtos', component: ProdutoListComponent },
   { path: 'produtos/novo', component: ProdutoFormComponent },
   { path: 'produtos/editar/:id', component: ProdutoFormComponent },
   { path: '',
-    redirectTo: '/produtos',
+    redirectTo: '/users',
     pathMatch: 'full'
-  }
+  },
+
+  { path: 'users', component: ListComponent },
+  { path: 'users/novo', component: EditComponent },
+  { path: 'users/editar/:id', component: EditComponent },
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     ProdutoListComponent,
-    ProdutoFormComponent
+    ProdutoFormComponent,
+    EditComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
