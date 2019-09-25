@@ -1,4 +1,5 @@
 export class User {
+    key: string = '';
     cpf: string = '';
     email: string = '';
     name: string = '';
