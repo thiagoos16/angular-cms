@@ -16,6 +16,8 @@ import { environment } from '../environments/environment';
 import { EditComponent } from './users/edit/edit.component';
 import { ListComponent } from './users/list/list.component';
 
+import {NgxMaskModule} from 'ngx-mask';
+
 const appRoutes: Routes = [
   { path: 'produtos', component: ProdutoListComponent },
   { path: 'produtos/novo', component: ProdutoFormComponent },
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     HttpClientInMemoryWebApiModule.forRoot(InMemoryData),
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
