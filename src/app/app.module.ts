@@ -12,6 +12,9 @@ import { ProdutoFormComponent } from './produtos/produto-form/produto-form.compo
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 import { environment } from '../environments/environment';
 import { EditComponent } from './users/edit/edit.component';
 import { ListComponent } from './users/list/list.component';
@@ -48,6 +51,7 @@ const appRoutes: Routes = [
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     NgxMaskModule.forRoot()
   ],
   providers: [],
