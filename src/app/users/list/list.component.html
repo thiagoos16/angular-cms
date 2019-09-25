@@ -22,9 +22,15 @@
         <td> {{ user.phone }} </td>
         <!-- <td> {{ user.photo }} </td> -->
         <td>
-          <a *ngIf="user.type == 'cms'" class="btn btn-primary" title="Redefinir senha" routerLink="/users/editar/{{ user.id }}">
+          <a *ngIf="user.type == 'cms'; else userFromApp" class="btn btn-primary" title="Editar dados" routerLink="/users/editar/{{ user.key }}">
             <i class="fa fa-edit"> </i>
           </a>
+
+          <ng-template #userFromApp>
+              <a class="btn btn-info" title="Enviar email para redefinir senha" routerLink="#">
+                <i class="fa fa-paper-plane"> </i>
+              </a>
+          </ng-template>
           <!-- <a class="btn btn-danger" title="excluir" (click)="remove(produto)">
             <i class="fas fa-trash"> </i>
           </a> -->
