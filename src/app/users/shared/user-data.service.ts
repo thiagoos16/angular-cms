@@ -11,7 +11,7 @@ export class UserDataService {
 
   constructor() { }
 
-  changeContato(user: User, key: string) {
+  changeUser(user: User, key: string) {
     this.userSource.next({ user: user, key: key });
   }
 }
