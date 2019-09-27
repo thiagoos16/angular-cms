@@ -19,20 +19,23 @@ import { environment } from '../environments/environment';
 import { EditComponent } from './users/edit/edit.component';
 import { ListComponent } from './users/list/list.component';
 
-import {NgxMaskModule} from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
+import { LoginFormComponent } from './login/form/form.component';
 
 const appRoutes: Routes = [
   { path: 'produtos', component: ProdutoListComponent },
   { path: 'produtos/novo', component: ProdutoFormComponent },
   { path: 'produtos/editar/:id', component: ProdutoFormComponent },
   { path: '',
-    redirectTo: '/users',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
 
   { path: 'users', component: ListComponent },
   { path: 'users/novo', component: EditComponent },
   { path: 'users/editar/:key', component: EditComponent },
+
+  { path: 'login', component: LoginFormComponent }
 ]
 
 @NgModule({
@@ -41,7 +44,8 @@ const appRoutes: Routes = [
     ProdutoListComponent,
     ProdutoFormComponent,
     EditComponent,
-    ListComponent
+    ListComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
