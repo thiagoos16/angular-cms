@@ -6,6 +6,14 @@
   <div class="card-body">
     <form (ngSubmit)="onSubmit()" #form="ngForm">
 
+      <div *ngIf="emailSended" class="alert alert-warning">
+        E-mail enviado com sucesso. Verifique sua caixa de entrada para altera sua senha.
+      </div>
+
+      <div *ngIf="userErrors.code" class="alert alert-danger">
+        É bem provavel que tal e-mail já esteja cadastrado, seu jumento!!!
+      </div>
+
       <div class="form-group">
         <label> Nome </label>
         <input type="text" class="form-control" [(ngModel)]="user.name" name="name"  #name="ngModel" required minlength="3" />
@@ -62,36 +70,46 @@
         </div>
       </div>  
 
-      <div class="form-group">
-        <label> Senha </label>
-        <input type="text" class="form-control" [(ngModel)]="user.password" name="password"  #password="ngModel" required minlength="6"/>
+      <div *ngIf="!user.uid">
+        <div class="form-group">
+          <label> Senha </label>
+          <input type="text" class="form-control" [(ngModel)]="user.password" name="password"  #password="ngModel" required minlength="6"/>
 
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-          <div *ngIf="password.errors.required">
-            Senha é obrigatório.
-          </div>
-          <div *ngIf="password.errors.minlength">
-            Senha precisa ter no mínimo 6 caracteres.
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+              Senha é obrigatório.
+            </div>
+            <div *ngIf="password.errors.minlength">
+              Senha precisa ter no mínimo 6 caracteres.
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label> Confirmar Senha </label>
-        <input type="text" class="form-control" [(ngModel)]="user.confirm_password" name="confirm_password"  #confirm_password="ngModel" required minlength="6" pattern="{{ password.value }}"/>
+        <div class="form-group">
+          <label> Confirmar Senha </label>
+          <input type="text" class="form-control" [(ngModel)]="user.confirm_password" name="confirm_password"  #confirm_password="ngModel" required minlength="6" pattern="{{ password.value }}"/>
 
-        <div *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" class="alert alert-danger">
-          <div *ngIf="confirm_password.errors.required">
-            Confirmar a Senha é obrigatório.
-          </div>
-          <div *ngIf="confirm_password.errors.pattern">
-            Rapaz!!! É óbvio que as senhas devem ser iguais. Repita a senha corretamente.
+          <div *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" class="alert alert-danger">
+            <div *ngIf="confirm_password.errors.required">
+              Confirmar a Senha é obrigatório.
+            </div>
+            <div *ngIf="confirm_password.errors.pattern">
+              Rapaz!!! É óbvio que as senhas devem ser iguais. Repita a senha corretamente.
+            </div>
           </div>
         </div>
       </div>  
 
-      <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid"> Salvar </button>
-      <a routerLink="/users" class="btn btn-secondary ml-2"> Cancelar </a>
+      <div style="float:left;">
+        <button type="submit" class="btn btn-primary ml-2" [disabled]="!form.form.valid"> Salvar </button>
+        <a routerLink="/users" class="btn btn-secondary ml-2"> Cancelar </a>
+      </div>
+      
+      <div class="row justify-content-end">
+        <a class="btn btn-info ml-2" title="Enviar email para redefinir senha" (click)="recovery(user)" style="text-decoration:none !important; color:white;">
+            <i class="fa fa-paper-plane"> Redefinir Senha </i>
+        </a>
+      </div>
 
     </form>
   </div>
