@@ -32,7 +32,7 @@ const appRoutes: Routes = [
 
   { path: 'users', component: ListComponent },
   { path: 'users/novo', component: EditComponent },
-  { path: 'users/editar/:id', component: EditComponent },
+  { path: 'users/editar/:key', component: EditComponent },
 ]
 
 @NgModule({
