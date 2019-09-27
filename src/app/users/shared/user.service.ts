@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app'; 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -9,7 +11,11 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private db:AngularFireDatabase) { }
+  constructor(private db:AngularFireDatabase, public firebaseauth: AngularFireAuth) { }
+
+  register(user): Promise<any> {
+    return this.firebaseauth.auth.createUserWithEmailAndPassword(user.email, user.password);
+  }
 
   insert(user: User) {
     this.db.list('users').push(user)
@@ -35,7 +41,22 @@ export class UserService {
       );
   }
 
+  getOne(key: string)  {
+    return this.db.object(`users/${key}`).snapshotChanges()
+    .pipe(
+      map(c => {
+        const data: any = { key: c.key, ...c.payload.val() };
+        // const modelo: TModel = data as TModel;
+        return data;
+      })
+    );
+  }
+
   delete(key: string) {
-    this.db.object(`user/${key}`).remove();
+    this.db.object(`users/${key}`).remove();
+  }
+
+  resetPassword(email: string): Promise<any> {
+    return firebase.auth().sendPasswordResetEmail(email);
   }
 }
