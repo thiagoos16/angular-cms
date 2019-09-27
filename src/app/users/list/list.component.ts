@@ -25,4 +25,12 @@ export class ListComponent implements OnInit {
     })
   }
 
+  recovery(user: User) {
+    this.userService.resetPassword(user.email).
+      then((res)=> {
+        console.log("Email enviado.");
+      }).catch(() => {
+        console.log("Erro de envio");
+      });
+  }
 }

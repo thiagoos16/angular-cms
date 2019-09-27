@@ -27,7 +27,7 @@
           </a>
 
           <ng-template #userFromApp>
-              <a class="btn btn-info" title="Enviar email para redefinir senha" routerLink="#">
+              <a class="btn btn-info" title="Enviar email para redefinir senha"  (click)="recovery(user)">
                 <i class="fa fa-paper-plane"> </i>
               </a>
           </ng-template>
