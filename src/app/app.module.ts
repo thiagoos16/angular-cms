@@ -21,21 +21,39 @@ import { ListComponent } from './users/list/list.component';
 
 import { NgxMaskModule } from 'ngx-mask';
 import { LoginFormComponent } from './login/form/form.component';
+import { SessionComponent } from './layouts/session/session.component';
+import { AuthComponent } from './layouts/auth/auth.component';
 
 const appRoutes: Routes = [
-  { path: 'produtos', component: ProdutoListComponent },
-  { path: 'produtos/novo', component: ProdutoFormComponent },
-  { path: 'produtos/editar/:id', component: ProdutoFormComponent },
-  { path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
+  { 
+    path: 'login',
+    component: SessionComponent,
+    children: [
+      { 
+        path: '',
+        component: LoginFormComponent}
+      ]
   },
 
-  { path: 'users', component: ListComponent },
-  { path: 'users/novo', component: EditComponent },
-  { path: 'users/editar/:key', component: EditComponent },
+  { path: '',
+          redirectTo: '/login',
+          pathMatch: 'full'
+  },
 
-  { path: 'login', component: LoginFormComponent }
+  { 
+    path: '',
+    component: AuthComponent,
+    children: [
+        { path: 'users', component: ListComponent },
+
+        { path: 'produtos', component: ProdutoListComponent },
+        { path: 'produtos/novo', component: ProdutoFormComponent },
+        { path: 'produtos/editar/:id', component: ProdutoFormComponent },
+
+        { path: 'users/novo', component: EditComponent },
+        { path: 'users/editar/:key', component: EditComponent },
+    ]
+  }
 ]
 
 @NgModule({
@@ -45,7 +63,9 @@ const appRoutes: Routes = [
     ProdutoFormComponent,
     EditComponent,
     ListComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    SessionComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
