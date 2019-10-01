@@ -23,6 +23,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { LoginFormComponent } from './login/form/form.component';
 import { SessionComponent } from './layouts/session/session.component';
 import { AuthComponent } from './layouts/auth/auth.component';
+import { AuthGuardService } from './security/auth';
 
 const appRoutes: Routes = [
   { 
@@ -34,25 +35,23 @@ const appRoutes: Routes = [
         component: LoginFormComponent}
       ]
   },
-
-  { path: '',
-          redirectTo: '/login',
-          pathMatch: 'full'
-  },
-
   { 
     path: '',
     component: AuthComponent,
+    canActivate: [AuthGuardService],
     children: [
-        { path: 'users', component: ListComponent },
-
         { path: 'produtos', component: ProdutoListComponent },
         { path: 'produtos/novo', component: ProdutoFormComponent },
         { path: 'produtos/editar/:id', component: ProdutoFormComponent },
 
+        { path: 'users', component: ListComponent },
         { path: 'users/novo', component: EditComponent },
         { path: 'users/editar/:key', component: EditComponent },
     ]
+  },
+  { path: '**',
+      redirectTo: '/login',
+      pathMatch: 'full'
   }
 ]
 
@@ -78,7 +77,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     NgxMaskModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
