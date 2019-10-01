@@ -1,11 +1,8 @@
 <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand text-light" routerLink=""> CMS </a>
-  <div class="row justify-content-end">
-    <a class="ml-2" title="Logout" (click)="logout()" style="text-decoration:none !important; color:white; cursor:pointer !important">
-      Logout
-    </a>
-  </div>
+  <a class="nav-link text-light" routerLink=""> CMS </a>
+  <a class="nav-link text-light" (click)="logout(user)" style="text-decoration:none !important; cursor:pointer;"> Logout </a>
 </nav>
+
 <div class="container p-2">
     <router-outlet> </router-outlet>
 </div>
