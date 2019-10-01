@@ -17,6 +17,10 @@ export class UserService {
     return this.firebaseauth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 
+  login(user): Promise<any> {
+    return this.firebaseauth.auth.signInWithEmailAndPassword(user.email, user.password);
+  }
+
   insert(user: User) {
     this.db.list('users').push(user)
       .then((result: any) => {
@@ -58,5 +62,20 @@ export class UserService {
 
   resetPassword(email: string): Promise<any> {
     return firebase.auth().sendPasswordResetEmail(email);
+  }
+
+  logout() {
+    return new Promise<any>((resolve, reject) => {
+      if (firebase.auth().currentUser) {
+        firebase.auth().signOut()
+          .then(() => {
+            console.log('Log Out');
+            resolve();
+          }).catch((error) => {
+            console.log(error);
+            reject();
+          });
+      }
+    });
   }
 }
